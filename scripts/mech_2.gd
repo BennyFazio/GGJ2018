@@ -39,6 +39,9 @@ var active = false
 var can_drop = false
 var jumping = false
 
+var descending_shell = false
+var beam_top_pos = Vector2()
+
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
@@ -142,12 +145,23 @@ func _fixed_process(delta):
 	global.mech_2_pos = pos
 	if active == true:
 		global.active_mech = 2
+		
+	if global.dropping_off == true:
+		set_pos(beam_top_pos)
+	
+
 
 func shoot():
 	shoot_timer.start()
 	var b = bullet.instance()
 	bullet_container.add_child(b)
 	b.start_at(rot, bullet_pos.get_global_pos())
+	
+	
+func position_for_drop(beam_top):
+	descending_shell = true
+	beam_top_pos = beam_top
+	#set_global_pos(beam_top)
 
 func drop():
 	drop_timer.start()

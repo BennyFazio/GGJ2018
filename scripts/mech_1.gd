@@ -38,6 +38,8 @@ var anim = "idle"
 var active = true
 var can_drop = false
 var jumping = false
+var descending_shell = false
+var beam_top_pos = Vector2()
 
 func _ready():
 	set_fixed_process(true)
@@ -142,6 +144,9 @@ func _fixed_process(delta):
 	global.mech_1_pos = pos
 	if active == true:
 		global.active_mech = 1
+	
+	if descending_shell == true:
+		set_global_pos(beam_top_pos)
 
 func shoot():
 	shoot_timer.start()
@@ -154,6 +159,14 @@ func drop():
 	set_collision_mask_bit( 3, false )
 	set_layer_mask_bit( 3, false)
 	
+	
+func position_for_drop(beam_top):
+	descending_shell = true
+	beam_top_pos = beam_top
+	#set_global_pos(beam_top)
+	
+	
+
 func spawn_beam():
 	pass
 	
