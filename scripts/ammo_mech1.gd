@@ -22,8 +22,8 @@ func _fixed_process(delta):
 
 func _on_ammo_mech1_body_enter( body ):
 	print("steam")
-#	if body.has_class("enemy"):
-#		queue_free()
+	if body.get_groups().has("enemy"):
+		queue_free()
 
 func _on_ammo_mech1_area_enter( area ):
 	print("cuck")
