@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 29.8824, 31.7474 )
 
-[node name="ammo_mech1" type="KinematicBody2D"]
+[node name="ammo_mech1" type="Area2D"]
 
 transform/pos = Vector2( 391.182, 271.462 )
 transform/scale = Vector2( 0.2163, 0.191652 )
@@ -16,9 +16,10 @@ input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-collision/margin = 0.08
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
 script/script = ExtResource( 1 )
 speed = 1000
 
@@ -31,5 +32,7 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[connection signal="body_enter" from="." to="." method="_on_ammo_mech1_body_enter"]
 
 

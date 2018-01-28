@@ -1,4 +1,4 @@
-extends  KinematicBody2D
+extends  Area2D
 
 var vel = Vector2()
 var mech_pos = Vector2()
@@ -20,3 +20,10 @@ func _fixed_process(delta):
 	if get_pos().x > mech_pos.x + 1000 or get_pos().x < mech_pos.x - 1000 or get_pos().y > mech_pos.y + 1000 or get_pos().y < mech_pos.y - 1000:
 		queue_free()
 
+
+
+func _on_ammo_mech1_area_enter( area ):
+	pass
+
+func _on_ammo_mech1_body_enter( body ):
+	print("steam")
