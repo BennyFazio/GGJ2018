@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var mech_1 = get_node("/scripts/mech_1")
 onready var mech_2 = get_node("mech_2")
+onready var sprite = get_node("sprite")
 var speed 
 var accel = 0
 var Zeus_1_pos = self.get_pos()
@@ -29,6 +30,7 @@ func _fixed_process(delta):
 		 side2 = -1
 	else:
 			side2 = 1
+			
  if global.active_mech == 1:
 		
 		if Mech1pos.x - self.get_pos().x > 150:

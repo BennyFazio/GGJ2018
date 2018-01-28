@@ -30,7 +30,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="zeus_five" type="KinematicBody2D"]
+[node name="zeus_five" type="KinematicBody2D" groups=[
+"mobs",
+]]
 
 transform/pos = Vector2( 501.978, 315.607 )
 input/pickable = false

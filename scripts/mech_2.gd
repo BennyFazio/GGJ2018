@@ -61,10 +61,10 @@ func _input(event):
 			shoot()
 		
 func _fixed_process(delta):
-	
 	if ground_ray.is_colliding():
-		if ground_ray.get_collider().get_groups().has("drop_platforms"):
-			can_drop = true
+		if ground_ray.get_collider() != null:
+			if ground_ray.get_collider().get_groups().has("drop_platforms"):
+				can_drop = true
 	if drop_timer.get_time_left() == 0:
 		set_collision_mask_bit( 3, true )
 		set_layer_mask_bit( 3, true)
