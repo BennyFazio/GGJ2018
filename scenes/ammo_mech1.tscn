@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/ammo_mech1.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://scenes/sounds.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/sampler.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -34,7 +34,7 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="SoundRoomParams" parent="." instance=ExtResource( 3 )]
+[node name="sampler" parent="." instance=ExtResource( 3 )]
 
 [connection signal="body_enter" from="." to="." method="_on_ammo_mech1_body_enter"]
 

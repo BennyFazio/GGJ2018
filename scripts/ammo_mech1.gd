@@ -1,6 +1,6 @@
 extends  Area2D
 
-onready var sound = get_node("SoundRoomParams")
+onready var sound = get_node("sampler")
 var vel = Vector2()
 var mech_pos = Vector2()
 export var speed = 1000
@@ -13,7 +13,7 @@ func start_at(dir, pos):
 	set_pos(pos)
 	vel = Vector2(2000, 0).rotated(dir + PI/2)
 	vel.y *= -1 # + v
-	sound.
+	sound.play("laser")
 	
 	
 func _fixed_process(delta):
