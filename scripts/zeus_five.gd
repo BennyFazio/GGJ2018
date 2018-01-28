@@ -36,6 +36,7 @@ func init(spawn_pos):
 	pos = spawn_pos
 
 func _ready():
+	add_to_group("enemy")
 	randomize()
 	speed = 200
 	set_fixed_process(true)
