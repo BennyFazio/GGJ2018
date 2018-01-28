@@ -12,6 +12,7 @@ const SCREEN_MAX_Y = 700
 
 
 #PLAYER SETTINGS
+var active_mech
 
 var transmittable = false
 var dropping_off = true
