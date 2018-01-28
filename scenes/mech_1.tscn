@@ -1,20 +1,57 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=23 format=1]
 
 [ext_resource path="res://scripts/mech_1.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ammo_mech1.tscn" type="PackedScene" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://data/images/mech1/idle4.png" type="Texture" id=3]
+[ext_resource path="res://data/images/mech1/idle2.png" type="Texture" id=4]
+[ext_resource path="res://data/images/mech1/idle3.png" type="Texture" id=5]
+[ext_resource path="res://data/images/mech1/idle1.png" type="Texture" id=6]
+[ext_resource path="res://data/images/mech1/upward1.png" type="Texture" id=7]
+[ext_resource path="res://data/images/mech1/upward2.png" type="Texture" id=8]
+[ext_resource path="res://data/images/mech1/upward3.png" type="Texture" id=9]
+[ext_resource path="res://data/images/mech1/upward4.png" type="Texture" id=10]
+[ext_resource path="res://data/images/mech1/forward1.png" type="Texture" id=11]
+[ext_resource path="res://data/images/mech1/forward2.png" type="Texture" id=12]
+[ext_resource path="res://data/images/mech1/forward3.png" type="Texture" id=13]
+[ext_resource path="res://data/images/mech1/forward4.png" type="Texture" id=14]
+[ext_resource path="res://data/images/mech1/vertical1.png" type="Texture" id=15]
+[ext_resource path="res://data/images/mech1/vertical2.png" type="Texture" id=16]
+[ext_resource path="res://data/images/mech1/vertical3.png" type="Texture" id=17]
+[ext_resource path="res://data/images/mech1/vertical4.png" type="Texture" id=18]
+[ext_resource path="res://data/images/mech1/jumping1.png" type="Texture" id=19]
+[ext_resource path="res://data/images/mech1/jumping2.png" type="Texture" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 30.181, 70.4565 )
+extents = Vector2( 18.4499, 34.7882 )
 
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "default",
+"name": "upward",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "forward",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "vertical",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "jumping",
 "speed": 5.0
 } ]
 
@@ -25,7 +62,7 @@ animations = [ {
 transform/pos = Vector2( 448, 277 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.29413, -40.1181 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -12.9984, -7.44373 )
 shapes/0/trigger = false
 collision/layers = 9
 collision/mask = 9
@@ -33,23 +70,24 @@ collision/margin = 0.08
 script/script = ExtResource( 1 )
 bullet = ExtResource( 2 )
 
-[node name="sprite" type="AnimatedSprite" parent="."]
+[node name="sprite" type="AnimatedSprite" parent="." groups=[
+"aiming_frames",
+]]
 
-transform/pos = Vector2( -1.21677, -39.2855 )
-transform/scale = Vector2( 0.961976, 2.22767 )
+transform/pos = Vector2( -14, -7 )
 frames = SubResource( 2 )
-animation = "default"
+animation = "forward"
 
 [node name="collision" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( -1.29413, -40.1181 )
+transform/pos = Vector2( -12.9984, -7.44373 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
 [node name="ground_ray" type="RayCast2D" parent="."]
 
-transform/pos = Vector2( 0, 32 )
+transform/pos = Vector2( -12, 32 )
 enabled = true
 cast_to = Vector2( 0, 30 )
 layer_mask = 9
@@ -77,39 +115,39 @@ drag_margin/bottom = 1.0
 
 [node name="Rbullet_pos1" type="Position2D" parent="."]
 
-transform/pos = Vector2( 4.87677, -129.801 )
+transform/pos = Vector2( -6.42139, -45.3414 )
 
 [node name="Rbullet_pos2" type="Position2D" parent="."]
 
-transform/pos = Vector2( 55.1073, -91.1952 )
+transform/pos = Vector2( 10.076, -45.7356 )
 
 [node name="Rbullet_pos3" type="Position2D" parent="."]
 
-transform/pos = Vector2( 59.0086, -39.5017 )
+transform/pos = Vector2( 23.0086, -18.5017 )
 
 [node name="Rbullet_pos4" type="Position2D" parent="."]
 
-transform/pos = Vector2( 65.3484, 5.85211 )
+transform/pos = Vector2( 28.1375, 29.5852 )
 
 [node name="Rbullet_pos5" type="Position2D" parent="."]
 
-transform/pos = Vector2( 20.3571, 67.6573 )
+transform/pos = Vector2( 14.3571, 70.6573 )
 
 [node name="Lbullet_pos1" type="Position2D" parent="."]
 
-transform/pos = Vector2( -7.78357, -129.728 )
+transform/pos = Vector2( -21.2926, -45.4315 )
 
 [node name="Lbullet_pos2" type="Position2D" parent="."]
 
-transform/pos = Vector2( -58.6762, -87.4156 )
+transform/pos = Vector2( -40.3039, -44.727 )
 
 [node name="Lbullet_pos3" type="Position2D" parent="."]
 
-transform/pos = Vector2( -66.4598, -37.7204 )
+transform/pos = Vector2( -50.7893, -18.8077 )
 
 [node name="Lbullet_pos4" type="Position2D" parent="."]
 
-transform/pos = Vector2( -74.8421, 8.38232 )
+transform/pos = Vector2( -42.9607, 31.0775 )
 
 [node name="Lbullet_pos5" type="Position2D" parent="."]
 

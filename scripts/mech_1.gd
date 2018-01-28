@@ -1,11 +1,13 @@
 extends KinematicBody2D
 
 onready var ground_ray = get_node("ground_ray")
-onready var sprite = get_node("sprite")
 onready var camera = get_node("camera")
 onready var shoot_timer = get_node("shoot_timer")
 onready var bullet_container = get_node("bullet_container")
 onready var drop_timer = get_node("drop_timer")
+
+onready var sprite = get_node("sprite")
+
 
 onready var R1 = get_node("Rbullet_pos1")
 onready var R2 = get_node("Rbullet_pos2")
@@ -38,7 +40,7 @@ var rot = 0
 var bullet_pos
 var target_dist
 var collider_name
-#var anim = "idle"
+var anim = "idle"
 
 var active = true
 var can_drop = false
@@ -64,6 +66,8 @@ func _input(event):
 			if vel.y == 0:
 				if can_drop == true:
 					drop()
+			
+
 					
 					
 						
@@ -73,7 +77,10 @@ func _input(event):
 			shoot()
 		
 		
-
+#	for i in get_tree().get_nodes_in_group("aiming_frames"):
+#		if abs(vel.x) >= 10:
+#			i.play()
+#		elif abs(vel.x) < 10:
 		
 		
 		
@@ -168,15 +175,19 @@ func _fixed_process(delta):
 		set_opacity(1)	
 		camera.make_current()
 	# set animation
-#	if vel.x == 0:
-#		anim = "idle"
-#	else:
-#		anim = "running"
-#	if vel.x > 0:
-#		sprite.set_flip_h(false)
-#	elif vel.x < 0:
-#		sprite.set_flip_h(true)
-#	sprite.play(anim)
+	if vel.x == 0:
+		anim = "idle"
+	else:
+		anim = "forward"
+		sprite.play()
+	if get_global_mouse_pos().x >= pos.x:
+		sprite.set_flip_h(false)
+	elif get_global_mouse_pos().x < pos.x:
+		sprite.set_flip_h(true)
+	sprite.set_animation(anim)
+	if sprite.get_animation() == "idle":
+		sprite.stop()
+	#sprite.play(anim)
 
 	global.mech_1_pos = pos
 

@@ -34,7 +34,7 @@ var mech_2_pos = Vector2()
 #Zeus 5
 #Physics
 var zeus_accel = 1200
-var zeus_maxspeed = 200
+var zeus_maxspeed = 170
 var zeus_friction = -50
 var zeus_gravity = 4000
 var zeus_jumpspeed = -1800

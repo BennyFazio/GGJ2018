@@ -38,6 +38,7 @@ func _ready():
 	#set_pos(pos)
 	
 func _fixed_process(delta):
+	print(acc)
 #	for mech in get_tree().get_nodes_in_group("mechs"):
 #		var mech_proximity = (mech.pos - pos).length()
 #		print(mech_proximity)
@@ -60,7 +61,7 @@ func _fixed_process(delta):
 	pos = get_global_pos()		
 	acc.y = gravity
 	acc += target_dist.normalized()
-	print(target)
+	#print(target)
 	
 #	if acc.x == 0:
 #		acc.x = vel.x * friction * delta
@@ -74,6 +75,14 @@ func _fixed_process(delta):
 		move(motion)
 #	if abs(vel.x) < 10:
 #		vel.x = 0
+	if target.x > pos.x:
+		if vel.x < 0:
+			acc *= -1
+			vel *= -.2
+	elif target.x < pos.x:
+		if vel.x > 0:
+			acc *= -1 
+			vel *= -.2
 	
 	
 	
