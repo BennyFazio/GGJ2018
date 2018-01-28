@@ -31,6 +31,7 @@ var mech1_proximity = Vector2()
 var mech2_proximity = Vector2()
 var anim = "idle"
 var actual_target = Vector2()
+var dmg = 0
 
 func init(spawn_pos):
 	pos = spawn_pos
@@ -117,7 +118,12 @@ func _fixed_process(delta):
 	sprite.play(anim)
 	
 			
-
+func damage():
+	if dmg <= 1:
+		dmg = dmg +1
+		print(dmg)
+	else:
+		queue_free()
 	
 #	pos = get_pos() + vel * delta
 #	set_pos(pos)
