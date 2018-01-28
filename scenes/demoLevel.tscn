@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=14 format=1]
 
-[ext_resource path="res://data/images/SteelPipes.png" type="Texture" id=1]
-[ext_resource path="res://data/images/FloorTile.png" type="Texture" id=2]
-[ext_resource path="res://scenes/ammo_mech1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
-[ext_resource path="res://data/images/FlatPalette.png" type="Texture" id=5]
-[ext_resource path="res://data/images/chainPart.png" type="Texture" id=6]
+[ext_resource path="res://data/images/SteelPipes3.png" type="Texture" id=1]
+[ext_resource path="res://data/images/SteelPipes2.png" type="Texture" id=2]
+[ext_resource path="res://data/images/SteelPipes1.png" type="Texture" id=3]
+[ext_resource path="res://data/images/FloorTile.png" type="Texture" id=4]
+[ext_resource path="res://scenes/ammo_mech1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://data/images/FlatPalette.png" type="Texture" id=7]
+[ext_resource path="res://data/images/chainPart.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -226,7 +228,7 @@ func spawn_beam():
 [sub_resource type="SpriteFrames" id=5]
 
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -254,16 +256,41 @@ scroll/limit_begin = Vector2( 0, 0 )
 scroll/limit_end = Vector2( 0, 0 )
 scroll/ignore_camera_zoom = false
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 
-motion/scale = Vector2( 1, 1 )
+motion/scale = Vector2( 0.1, 0.1 )
 motion/offset = Vector2( 0, 0 )
 motion/mirroring = Vector2( 0, 0 )
 
-[node name="Sprite 2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
 
-transform/pos = Vector2( 2077.14, -227.659 )
 texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 0, 0, 5120, 5120 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+editor/display_folded = true
+motion/scale = Vector2( 0.25, 0.25 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+
+texture = ExtResource( 2 )
+region = true
+region_rect = Rect2( 0, 0, 5120, 5120 )
+
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="ParallaxBackground"]
+
+editor/display_folded = true
+motion/scale = Vector2( 0.5, 0.5 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer1"]
+
+texture = ExtResource( 3 )
 region = true
 region_rect = Rect2( 0, 0, 5120, 5120 )
 
@@ -289,7 +316,7 @@ __meta__ = {
 
 transform/pos = Vector2( -0.00202751, -8.32677 )
 transform/scale = Vector2( 0.0494166, 0.519871 )
-texture = ExtResource( 2 )
+texture = ExtResource( 4 )
 region = true
 region_rect = Rect2( 0, 0, 3840, 128 )
 
@@ -315,7 +342,7 @@ collision/layers = 9
 collision/mask = 9
 collision/margin = 0.08
 script/script = SubResource( 4 )
-bullet = ExtResource( 3 )
+bullet = ExtResource( 5 )
 
 [node name="sprite" type="AnimatedSprite" parent="mech_1"]
 
@@ -437,12 +464,12 @@ bounce = 0.0
 [node name="Sprite" type="Sprite" parent="StaticBody2D"]
 
 transform/pos = Vector2( 0, -0.440125 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D/Sprite"]
 
 transform/pos = Vector2( -1.19763, -343.343 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 region = true
 region_rect = Rect2( 0, 0, 13, 520 )
 
@@ -478,12 +505,12 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="StaticBody2D1"]
 
 transform/pos = Vector2( 0, -0.440125 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D1/Sprite"]
 
 transform/pos = Vector2( -1.19763, -343.343 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 region = true
 region_rect = Rect2( 0, 0, 13, 520 )
 
@@ -519,12 +546,12 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="StaticBody2D2"]
 
 transform/pos = Vector2( 0, -0.440125 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D2/Sprite"]
 
 transform/pos = Vector2( -1.19763, -343.343 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 region = true
 region_rect = Rect2( 0, 0, 13, 520 )
 
@@ -560,12 +587,12 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="StaticBody2D3"]
 
 transform/pos = Vector2( 0, -0.440125 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D3/Sprite"]
 
 transform/pos = Vector2( -1.19763, -343.343 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 region = true
 region_rect = Rect2( 0, 0, 13, 520 )
 

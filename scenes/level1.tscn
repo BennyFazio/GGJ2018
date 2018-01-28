@@ -71,7 +71,7 @@ transform/pos = Vector2( 2172.37, 20.8899 )
 
 [node name="zeus_five" parent="." instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 1078.18, 528.864 )
+transform/pos = Vector2( 1077.18, 528.864 )
 
 [node name="mech_2" parent="." instance=ExtResource( 6 )]
 
