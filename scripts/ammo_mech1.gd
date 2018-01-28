@@ -19,7 +19,4 @@ func _fixed_process(delta):
 	set_pos(get_pos() + vel * delta)
 	if get_pos().x > mech_pos.x + 1000 or get_pos().x < mech_pos.x - 1000 or get_pos().y > mech_pos.y + 1000 or get_pos().y < mech_pos.y - 1000:
 		queue_free()
-		
-	if is_colliding() == true:
-		print("cccc")
 
