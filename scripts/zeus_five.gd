@@ -114,7 +114,7 @@ func _fixed_process(delta):
 			elif sprite.is_flipped_h() == false:
 				anim = "attacking"
 	else:
-		anim = "walking"
+		anim = "attacking"
 	sprite.play(anim)
 	
 			

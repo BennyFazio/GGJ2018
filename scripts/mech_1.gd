@@ -161,14 +161,11 @@ func drop():
 	set_collision_mask_bit( 3, false )
 	set_layer_mask_bit( 3, false)
 	
-	
 func position_for_drop(beam_top):
 	descending_shell = true
 	beam_top_pos = beam_top
 	#set_global_pos(beam_top)
 	
-	
-
 func spawn_beam():
 	pass
 	
