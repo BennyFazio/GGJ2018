@@ -12,20 +12,23 @@ var picking_up
 
 var mouse_pos = Vector2()
 
+var immovable = false
+
 
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 
 func _input(event):
-	if event.is_action_pressed("ui_q"):
-		vel = Vector2(-50, 0)
-	if event.is_action_pressed("ui_e"):
-		vel = Vector2(50, 0)
-	if event.is_action_released("ui_q"):
-		vel = Vector2(0, 0)
-	if event.is_action_released("ui_e"):
-		vel = Vector2(0, 0)
+	if immovable == false:
+		if event.is_action_pressed("ui_q"):
+			vel = Vector2(-50, 0)
+		if event.is_action_pressed("ui_e"):
+			vel = Vector2(50, 0)
+		if event.is_action_released("ui_q"):
+			vel = Vector2(0, 0)
+		if event.is_action_released("ui_e"):
+			vel = Vector2(0, 0)
 #	if global.dropping_off == true:
 #		if (event.type==InputEvent.MOUSE_MOTION):
 #			mouse_pos = event.get_pos()
