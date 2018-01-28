@@ -18,7 +18,7 @@ var player_accel = 1200
 var player_maxspeed = 200
 var player_friction = -500
 var player_gravity = 4000
-var player_jumpspeed = -1800
+var player_jumpspeed = -1600
 var player_minjump = -200
 
 #Mech 1
