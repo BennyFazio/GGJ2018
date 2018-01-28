@@ -2,9 +2,9 @@
 
 [ext_resource path="res://scripts/zeus_five.gd" type="Script" id=1]
 [ext_resource path="res://data/images/boxer_bill/image2.png" type="Texture" id=2]
-[ext_resource path="res://data/images/boxer_bill/image1.png" type="Texture" id=3]
-[ext_resource path="res://data/images/boxer_bill/image3.png" type="Texture" id=4]
-[ext_resource path="res://data/images/boxer_bill/image4.png" type="Texture" id=5]
+[ext_resource path="res://data/images/boxer_bill/image3.png" type="Texture" id=3]
+[ext_resource path="res://data/images/boxer_bill/image4.png" type="Texture" id=4]
+[ext_resource path="res://data/images/boxer_bill/image1.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -19,14 +19,14 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "walking",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "attacking",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "walking",
 "speed": 5.0
 } ]
 
