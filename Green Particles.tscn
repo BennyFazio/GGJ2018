@@ -1,0 +1,30 @@
+[gd_scene format=1]
+
+[node name="Particles2D" type="Particles2D"]
+
+transform/pos = Vector2( 478.16, 255.08 )
+config/amount = 1
+config/lifetime = 14.2524
+config/time_scale = 4.10846
+config/process_mode = 1
+params/direction = 45.82
+params/spread = 19.64
+params/linear_velocity = 20.0
+params/spin_velocity = 93.09
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 10.0
+params/final_size = 5.0
+params/hue_variation = 0.2
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/direction = 0.02
+randomness/linear_velocity = 0.2
+color/color = Color( 0.20039, 0.699219, 0.0409698, 1 )
+
+

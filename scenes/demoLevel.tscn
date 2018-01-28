@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://scripts/demoLevel.gd" type="Script" id=1]
 [ext_resource path="res://data/images/SteelPipes3.png" type="Texture" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://scenes/Zeus_1.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/zeus_five.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/player_deployment.tscn" type="PackedScene" id=11]
+[ext_resource path="res://particles.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Green Particles.tscn" type="PackedScene" id=13]
+[ext_resource path="res://explosion thing.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -490,11 +493,23 @@ _update_shape_index = 0
 
 [node name="zeus1" parent="." instance=ExtResource( 9 )]
 
+transform/pos = Vector2( 1500, 283.106 )
+
+[node name="zeus2" parent="." instance=ExtResource( 9 )]
+
 transform/pos = Vector2( 2156.83, 283.106 )
+
+[node name="zeus3" parent="." instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 1300, -400 )
 
 [node name="zeus_five" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 4158.72, 346.539 )
+
+[node name="zeus_five1" parent="." instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 1200, -800 )
 
 [node name="player_deployment" parent="." instance=ExtResource( 11 )]
 
@@ -503,5 +518,61 @@ transform/pos = Vector2( 600.594, 150.321 )
 [node name="zeus_five 2" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 2775.42, 307.238 )
+
+[node name="Particles2D" parent="." instance=ExtResource( 12 )]
+
+transform/pos = Vector2( 552.394, 329.087 )
+
+[node name="Particles2D1" parent="." instance=ExtResource( 12 )]
+
+transform/pos = Vector2( 552.394, 329.087 )
+
+[node name="Particles2D2" parent="." instance=ExtResource( 12 )]
+
+transform/pos = Vector2( 2039.59, 432.047 )
+
+[node name="Particles2D3" parent="." instance=ExtResource( 12 )]
+
+transform/pos = Vector2( 1662.07, -494.593 )
+
+[node name="Particles2D4" parent="." instance=ExtResource( 12 )]
+
+transform/pos = Vector2( 2377.07, 254.727 )
+
+[node name="Particles2D5" parent="." instance=ExtResource( 12 )]
+
+transform/pos = Vector2( 1404.67, 363.407 )
+
+[node name="Particles2D 2" parent="." instance=ExtResource( 13 )]
+
+transform/pos = Vector2( 428.621, -287.825 )
+
+[node name="Particles2D6" parent="." instance=ExtResource( 13 )]
+
+transform/pos = Vector2( 674.317, -292.347 )
+params/spin_velocity = 93.09
+color/color = Color( 0.20039, 0.699219, 0.0409698, 1 )
+
+[node name="Particles2D7" parent="." instance=ExtResource( 13 )]
+
+transform/pos = Vector2( 954.681, -286.317 )
+params/spin_velocity = 93.09
+color/color = Color( 0.20039, 0.699219, 0.0409698, 1 )
+
+[node name="Particles2D8" parent="." instance=ExtResource( 13 )]
+
+transform/pos = Vector2( 1468.68, -281.795 )
+params/spin_velocity = 93.09
+color/color = Color( 0.20039, 0.699219, 0.0409698, 1 )
+
+[node name="Particles2D9" parent="." instance=ExtResource( 13 )]
+
+transform/pos = Vector2( 1245.6, -289.332 )
+params/spin_velocity = 93.09
+color/color = Color( 0.20039, 0.699219, 0.0409698, 1 )
+
+[node name="Particles2D 3" parent="." instance=ExtResource( 14 )]
+
+transform/pos = Vector2( 726.953, 266.469 )
 
 
