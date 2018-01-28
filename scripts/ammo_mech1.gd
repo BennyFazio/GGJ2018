@@ -24,4 +24,3 @@ func _on_ammo_mech1_body_enter( body ):
 	if body.get_groups().has("enemy"):
 		body.damage()
 		queue_free()
-		print("hit!")

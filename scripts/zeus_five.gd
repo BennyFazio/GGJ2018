@@ -121,7 +121,6 @@ func _fixed_process(delta):
 func damage():
 	if dmg <= 1:
 		dmg = dmg +1
-		print(dmg)
 	else:
 		queue_free()
 	
