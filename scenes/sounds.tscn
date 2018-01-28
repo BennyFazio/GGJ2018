@@ -102,7 +102,7 @@ samples/transmit = {
 "sample": ExtResource( 14 )
 }
 
-[node name="SoundRoomParams" type="SoundRoomParams"]
+[node name="sounds" type="SoundRoomParams"]
 
 reverb/mode = 3
 params/speed_of_scale = 1.0
@@ -118,7 +118,7 @@ params/attenuation_hf_ratio_exp = 1.0
 params/attenuation_reverb_scale = 0.0
 force_to_all_sources = false
 
-[node name="SamplePlayer2D" type="SamplePlayer2D" parent="."]
+[node name="samples" type="SamplePlayer2D" parent="."]
 
 params/volume_db = 0.0
 params/pitch_scale = 1.0
