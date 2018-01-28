@@ -4,6 +4,7 @@ onready var mech_1 = get_node("mech_1")
 onready var mech_2 = get_node("mech_2")
 onready var beam = get_node("beam")
 onready var timer = get_node("timer")
+onready var sfx = get_node("sampler")
 #onready var beam_top = get_node("beam/beam_top")
 
 var beam_top = Vector2()
@@ -53,6 +54,7 @@ func descend_shell():
 	if beam_position_fixed == true:
 		global.dropping_off = false
 		shell.descending_shell = false
+		sfx.play("beamdown")
 		if timer.get_time_left() == 0:
 			timer.start()
 			beam.hide()

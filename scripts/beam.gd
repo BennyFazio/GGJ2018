@@ -22,9 +22,9 @@ func _ready():
 func _input(event):
 	if immovable == false:
 		if event.is_action_pressed("ui_q"):
-			vel = Vector2(-50, 0)
+			vel = Vector2(-150, 0)
 		if event.is_action_pressed("ui_e"):
-			vel = Vector2(50, 0)
+			vel = Vector2(150, 0)
 		if event.is_action_released("ui_q"):
 			vel = Vector2(0, 0)
 		if event.is_action_released("ui_e"):

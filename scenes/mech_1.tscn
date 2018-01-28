@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=1]
+[gd_scene load_steps=23 format=1]
 
 [ext_resource path="res://scripts/mech_1.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ammo_mech1.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://data/images/mech1/forward1.png" type="Texture" id=17]
 [ext_resource path="res://data/images/mech1/forward2.png" type="Texture" id=18]
 [ext_resource path="res://data/images/mech1/forward4.png" type="Texture" id=19]
+[ext_resource path="res://scenes/sampler.tscn" type="PackedScene" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -168,5 +169,7 @@ process_mode = 1
 wait_time = 0.2
 one_shot = true
 autostart = false
+
+[node name="sampler" parent="." instance=ExtResource( 20 )]
 
 

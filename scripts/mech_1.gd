@@ -6,6 +6,7 @@ onready var shoot_timer = get_node("shoot_timer")
 onready var bullet_container = get_node("bullet_container")
 onready var drop_timer = get_node("drop_timer")
 onready var sprite = get_node("sprite")
+onready var sfx = get_node("sampler")
 
 onready var R1 = get_node("Rbullet_pos1")
 onready var R2 = get_node("Rbullet_pos2")
@@ -49,6 +50,7 @@ func _input(event):
 	if active == true:
 		if event.is_action_pressed("ui_up") and ground_ray.is_colliding():
 			anim = "jumping"
+			sfx.play("mechjumping")
 			vel.y = jump_speed
 		if event.is_action_released("ui_up"):
 			vel.y = clamp(vel.y, min_jump, vel.y)
