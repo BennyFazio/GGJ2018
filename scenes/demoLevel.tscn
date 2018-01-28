@@ -1,33 +1,36 @@
-[gd_scene load_steps=13 format=1]
+[gd_scene load_steps=15 format=1]
 
-[ext_resource path="res://data/images/SteelPipes3.png" type="Texture" id=1]
-[ext_resource path="res://data/images/SteelPipes2.png" type="Texture" id=2]
-[ext_resource path="res://data/images/SteelPipes1.png" type="Texture" id=3]
-[ext_resource path="res://data/images/FloorTile.png" type="Texture" id=4]
-[ext_resource path="res://data/images/FlatPalette.png" type="Texture" id=5]
-[ext_resource path="res://data/images/chainPart.png" type="Texture" id=6]
-[ext_resource path="res://data/images/SteelBox.png" type="Texture" id=7]
-[ext_resource path="res://scenes/mech_1.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/zeus_five.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scripts/demoLevel.gd" type="Script" id=1]
+[ext_resource path="res://data/images/SteelPipes3.png" type="Texture" id=2]
+[ext_resource path="res://data/images/SteelPipes2.png" type="Texture" id=3]
+[ext_resource path="res://data/images/SteelPipes1.png" type="Texture" id=4]
+[ext_resource path="res://data/images/FloorTile.png" type="Texture" id=5]
+[ext_resource path="res://data/images/FlatPalette.png" type="Texture" id=6]
+[ext_resource path="res://data/images/chainPart.png" type="Texture" id=7]
+[ext_resource path="res://data/images/SteelBox.png" type="Texture" id=8]
+[ext_resource path="res://scenes/Zeus_1.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/zeus_five.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/player_deployment.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 189.672, 12.9731 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 120.171, 10 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 91.9474, 91.2586 )
 
-[node name="Node2D" type="Node2D"]
+[node name="demo_level" type="Node2D"]
 
 transform/pos = Vector2( 1.10803, 0 )
+script/script = ExtResource( 1 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -56,7 +59,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
 
 transform/pos = Vector2( 4579.39, -95.7363 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 0, 0, 20480, 5120 )
 __meta__ = {
@@ -77,7 +80,7 @@ __meta__ = {
 
 transform/pos = Vector2( 4579.39, -95.7363 )
 transform/scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 region = true
 region_rect = Rect2( 0, 0, 20480, 5120 )
 __meta__ = {
@@ -97,7 +100,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer1"]
 
 transform/pos = Vector2( 4579.39, -97.7869 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 region = true
 region_rect = Rect2( 0, 0, 20480, 5120 )
 __meta__ = {
@@ -127,7 +130,7 @@ __meta__ = {
 
 transform/pos = Vector2( -0.00202751, -8.32677 )
 transform/scale = Vector2( 0.0494166, 0.519871 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 region = true
 region_rect = Rect2( 0, 0, 7680, 128 )
 
@@ -145,7 +148,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 1060.67, 69.4176 )
 input/pickable = false
-shapes/0/shape = SubResource( 5 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.10803, 94.1828 )
 shapes/0/trigger = false
 collision/layers = 8
@@ -163,19 +166,19 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="StaticBody2D"]
 
 transform/pos = Vector2( 0, -0.440125 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D/Sprite"]
 
 transform/pos = Vector2( -1.19763, -343.343 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 region = true
 region_rect = Rect2( 0, 0, 13, 520 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 
 transform/pos = Vector2( -1.10803, 94.1828 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
@@ -186,7 +189,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 1430.55, -77.8484 )
 input/pickable = false
-shapes/0/shape = SubResource( 5 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.10803, 94.1828 )
 shapes/0/trigger = false
 collision/layers = 8
@@ -205,19 +208,19 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="StaticBody2D1"]
 
 transform/pos = Vector2( 0, -0.440125 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D1/Sprite"]
 
 transform/pos = Vector2( -1.19763, -343.343 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 region = true
 region_rect = Rect2( 0, 0, 13, 520 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D1"]
 
 transform/pos = Vector2( -1.10803, 94.1828 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
@@ -228,7 +231,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 1780.86, -76.9145 )
 input/pickable = false
-shapes/0/shape = SubResource( 5 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.10803, 94.1828 )
 shapes/0/trigger = false
 collision/layers = 8
@@ -247,19 +250,19 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="StaticBody2D2"]
 
 transform/pos = Vector2( 0, -0.440125 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D2/Sprite"]
 
 transform/pos = Vector2( -1.19763, -343.343 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 region = true
 region_rect = Rect2( 0, 0, 13, 520 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 
 transform/pos = Vector2( -1.10803, 94.1828 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
@@ -268,7 +271,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 1518.24, 282.345 )
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 21.5546, 29.9369 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -284,12 +287,12 @@ __meta__ = {
 [node name="Sprite 2" type="Sprite" parent="StaticBody2D 2"]
 
 transform/pos = Vector2( -13.6376, -6.05231 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D 2"]
 
 transform/pos = Vector2( 21.5546, 29.9369 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
@@ -298,7 +301,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 2331.62, 285.686 )
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 21.5546, 29.9369 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -314,12 +317,12 @@ __meta__ = {
 [node name="Sprite 2" type="Sprite" parent="StaticBody2D4"]
 
 transform/pos = Vector2( -13.6376, -6.05231 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 
 transform/pos = Vector2( 21.5546, 29.9369 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
@@ -328,7 +331,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 2331.62, 108.646 )
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 21.5546, 29.9369 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -344,12 +347,12 @@ __meta__ = {
 [node name="Sprite 2" type="Sprite" parent="StaticBody2D5"]
 
 transform/pos = Vector2( -13.6376, -6.05231 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
 
 transform/pos = Vector2( 21.5546, 29.9369 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
@@ -358,7 +361,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 105.95, 286.853 )
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 21.5546, 29.9369 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -374,12 +377,12 @@ __meta__ = {
 [node name="Sprite 2" type="Sprite" parent="StaticBody2D6"]
 
 transform/pos = Vector2( -13.6376, -6.05231 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
 
 transform/pos = Vector2( 21.5546, 29.9369 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
@@ -388,7 +391,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 105.95, 107.283 )
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 21.5546, 29.9369 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -404,12 +407,12 @@ __meta__ = {
 [node name="Sprite 2" type="Sprite" parent="StaticBody2D7"]
 
 transform/pos = Vector2( -13.6376, -6.05231 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
 
 transform/pos = Vector2( 21.5546, 29.9369 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
@@ -418,7 +421,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 105.95, -70.9257 )
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 21.5546, 29.9369 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -434,12 +437,12 @@ __meta__ = {
 [node name="Sprite 2" type="Sprite" parent="StaticBody2D8"]
 
 transform/pos = Vector2( -13.6376, -6.05231 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D8"]
 
 transform/pos = Vector2( 21.5546, 29.9369 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
@@ -450,7 +453,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 2050.24, 57.3453 )
 input/pickable = false
-shapes/0/shape = SubResource( 5 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.10803, 94.1828 )
 shapes/0/trigger = false
 collision/layers = 8
@@ -469,26 +472,36 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="StaticBody2D3"]
 
 transform/pos = Vector2( -1.80493, -0.440125 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D3/Sprite"]
 
 transform/pos = Vector2( -1.19763, -343.343 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 region = true
 region_rect = Rect2( 0, 0, 13, 520 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 
 transform/pos = Vector2( -1.10803, 94.1828 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
-[node name="mech_1" parent="." instance=ExtResource( 8 )]
+[node name="zeus1" parent="." instance=ExtResource( 9 )]
 
-[node name="zeus_five" parent="." instance=ExtResource( 9 )]
+transform/pos = Vector2( 2156.83, 283.106 )
+
+[node name="zeus_five" parent="." instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 4158.72, 346.539 )
+
+[node name="player_deployment" parent="." instance=ExtResource( 11 )]
+
+transform/pos = Vector2( 600.594, 150.321 )
+
+[node name="zeus_five 2" parent="." instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 2775.42, 307.238 )
 
 
