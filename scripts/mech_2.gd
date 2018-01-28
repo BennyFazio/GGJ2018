@@ -61,6 +61,7 @@ func _input(event):
 			shoot()
 		
 func _fixed_process(delta):
+	
 	if ground_ray.is_colliding():
 		if ground_ray.get_collider().get_groups().has("drop_platforms"):
 			can_drop = true
@@ -146,8 +147,10 @@ func _fixed_process(delta):
 	if active == true:
 		global.active_mech = 2
 		
-	if global.dropping_off == true:
+	if descending_shell == true:
 		set_pos(beam_top_pos)
+	
+		
 	
 
 

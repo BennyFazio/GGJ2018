@@ -3,6 +3,7 @@ extends Node2D
 onready var mech_1 = get_node("mech_1")
 onready var mech_2 = get_node("mech_2")
 onready var beam = get_node("beam")
+onready var timer = get_node("timer")
 #onready var beam_top = get_node("beam/beam_top")
 
 var beam_top = Vector2()
@@ -37,14 +38,23 @@ func _fixed_process(delta):
 		elif mech_2.active == true:
 			shell = mech_1
 		shell.position_for_drop(beam_top)
+	if beam_position_fixed == true:
+		beam.immovable = true
+		
 		
 		
 	
 		
 		
-	print(shell.get_pos())
+	#print(shell.get_pos())
 	
 		
 func descend_shell():
 	if beam_position_fixed == true:
 		global.dropping_off = false
+		shell.descending_shell = false
+		if timer.get_time_left() == 0:
+			timer.start()
+			beam.hide()
+			global.transmittable = true
+		
