@@ -22,19 +22,19 @@ transform/pos = Vector2( 255.524, 131.946 )
 
 [node name="mech_2" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( -163.402, -421.791 )
+transform/pos = Vector2( -37.4328, -1937.32 )
 
 [node name="beam" type="KinematicBody2D" parent="."]
 
 visibility/opacity = 0.49
-transform/pos = Vector2( -172.043, -162.649 )
-transform/scale = Vector2( 1.78185, 5.63109 )
+transform/pos = Vector2( -48.1474, -1774.87 )
+transform/scale = Vector2( 1.78185, 2.46748 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
+collision/layers = 32
+collision/mask = 32
 collision/margin = 0.08
 script/script = ExtResource( 4 )
 __meta__ = {
@@ -43,6 +43,8 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="beam"]
 
+transform/pos = Vector2( 0, 937.252 )
+transform/scale = Vector2( 1, 30.2891 )
 texture = ExtResource( 5 )
 modulate = Color( 0.835938, 0, 0.705322, 1 )
 
