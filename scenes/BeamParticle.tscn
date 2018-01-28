@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://beamTexture2.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+shader/shading_mode = 0
+
+[node name="Container" type="Container"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+material/material = SubResource( 1 )
+transform/pos = Vector2( 602.282, 461.874 )
+transform/scale = Vector2( 0.02, 4.23812 )
+config/amount = 1
+config/lifetime = 0.5
+config/process_mode = 1
+config/texture = ExtResource( 1 )
+params/direction = 180.0
+params/spread = 0.0
+params/linear_velocity = -85.54
+params/spin_velocity = 0.01
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.002
+params/initial_angle = 0.0
+params/initial_size = 1024.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 6.96
+params/anim_initial_pos = 0.0
+
+

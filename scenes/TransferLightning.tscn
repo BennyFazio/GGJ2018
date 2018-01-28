@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://TransferLightning.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+process/pause_mode = 2
+transform/pos = Vector2( 0.0129623, 1.63269 )
+script/script = ExtResource( 1 )
+
+[node name="LightningPoint1" type="Node2D" parent="."]
+
+process/pause_mode = 2
+transform/pos = Vector2( 215.042, 155.35 )
+
+[node name="LightningPoint2" type="Node2D" parent="."]
+
+process/pause_mode = 2
+transform/pos = Vector2( 806.408, 162.232 )
+
+

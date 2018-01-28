@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://ParticleScene.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+transform/pos = Vector2( 368.077, 270.799 )
+script/script = ExtResource( 1 )
+
+[connection signal="draw" from="." to="." method="_on_Node2D_draw"]
+
+

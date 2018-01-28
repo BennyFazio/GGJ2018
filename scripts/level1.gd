@@ -1,7 +1,7 @@
 extends Node
 
-onready var mech_1 = get_node("player_deployment/mech_1")
-onready var mech_2 = get_node("player_deployment/mech_2")
+onready var mech_1 = get_node("mech_1")
+onready var mech_2 = get_node("mech_2")
 
 func _ready():
 	set_fixed_process(true)
