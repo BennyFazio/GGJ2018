@@ -1,11 +1,20 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://scripts/level1.gd" type="Script" id=1]
 [ext_resource path="res://scenes/platform1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/platform_drop.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/platform_scrolling.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/zeus_five.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/player_deployment.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/flying_robot_area2d.gd" type="Script" id=6]
+[ext_resource path="res://scripts/flying_robot.gd" type="Script" id=7]
+[ext_resource path="res://icon.png" type="Texture" id=8]
+[ext_resource path="res://scenes/mech_2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/mech_1.tscn" type="PackedScene" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 30.8351, 32.487 )
 
 [node name="level1" type="Node"]
 
@@ -70,10 +79,47 @@ transform/pos = Vector2( 2172.37, 20.8899 )
 
 [node name="zeus_five" parent="." instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 1494.71, 525.849 )
+transform/pos = Vector2( 1077.18, 528.864 )
 
-[node name="player_deployment" parent="." instance=ExtResource( 6 )]
+[node name="Area2D" type="Area2D" parent="zeus_five"]
 
-transform/pos = Vector2( 1744.03, 249.941 )
+transform/pos = Vector2( 2.05066, -172.246 )
+input/pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 6 )
+
+[node name="flying_robot" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( 1079.23, 356.618 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flying_robot"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="flying_robot"]
+
+texture = ExtResource( 8 )
+
+[node name="mech_2" parent="." instance=ExtResource( 9 )]
+
+[node name="mech_1" parent="." instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 1282.4, 486.773 )
 
 
