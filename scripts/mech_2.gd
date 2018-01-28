@@ -140,6 +140,8 @@ func _fixed_process(delta):
 		sprite.stop()
 	sprite.play(anim)
 	global.mech_2_pos = pos
+	if active == true:
+		global.active_mech = 2
 
 func shoot():
 	shoot_timer.start()
