@@ -2,7 +2,9 @@ extends KinematicBody2D
 
 
 
-
+onready var sprite = get_node("sprite")
+onready var burner1 = get_node("sprite/burner1")
+onready var burner2 = get_node("sprite/burner2")
 
 
 var accel = global.zeus_accel
@@ -27,6 +29,8 @@ var mech1_location = Vector2()
 var mech2_location = Vector2()
 var mech1_proximity = Vector2()
 var mech2_proximity = Vector2()
+var anim = "idle"
+var actual_target = Vector2()
 
 func init(spawn_pos):
 	pos = spawn_pos
@@ -38,7 +42,7 @@ func _ready():
 	#set_pos(pos)
 	
 func _fixed_process(delta):
-	print(acc)
+	#print(acc)
 #	for mech in get_tree().get_nodes_in_group("mechs"):
 #		var mech_proximity = (mech.pos - pos).length()
 #		print(mech_proximity)
@@ -57,7 +61,11 @@ func _fixed_process(delta):
 		target = mech2_location
 		target_dist = target - pos
 		
-	
+	if target.x > pos.x:
+		actual_target = target - Vector2(60, 0)
+	elif target.x < pos.x:
+		actual_target = target + Vector2(60, 0)
+		
 	pos = get_global_pos()		
 	acc.y = gravity
 	acc += target_dist.normalized()
@@ -75,18 +83,40 @@ func _fixed_process(delta):
 		move(motion)
 #	if abs(vel.x) < 10:
 #		vel.x = 0
-	if target.x > pos.x:
-		if vel.x < 0:
+	if actual_target.x >= pos.x:
+		if vel.x <= 0:
 			acc *= -1
 			vel *= -.2
-	elif target.x < pos.x:
+	elif actual_target.x < pos.x:
 		if vel.x > 0:
 			acc *= -1 
 			vel *= -.2
 	
 	
+	#if vel.x == 0:
+	#	anim = "idle"
 	
+	sprite.play(anim)
+	if vel.x < 0:
+		sprite.set_flip_h(false)
+		burner1.show()
+		burner2.hide()
+	elif vel.x >= 0:
+		sprite.set_flip_h(true)
+		burner1.hide()
+		burner2.show()
+	if abs(target_dist.y) < 30:
+		if abs(target_dist.x) < 80:
+			if sprite.is_flipped_h():
+				anim = "attacking"
+			elif sprite.is_flipped_h() == false:
+				anim = "attacking"
+	else:
+		anim = "walking"
+	sprite.play(anim)
 	
+			
+
 	
 #	pos = get_pos() + vel * delta
 #	set_pos(pos)
