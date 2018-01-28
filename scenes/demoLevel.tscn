@@ -1,13 +1,243 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=14 format=1]
 
-[ext_resource path="res://data/images/SteelPipes.png" type="Texture" id=1]
-[ext_resource path="res://data/images/FloorTile.png" type="Texture" id=2]
-[ext_resource path="res://scenes/mech_1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/images/SteelPipes3.png" type="Texture" id=1]
+[ext_resource path="res://data/images/SteelPipes2.png" type="Texture" id=2]
+[ext_resource path="res://data/images/SteelPipes1.png" type="Texture" id=3]
+[ext_resource path="res://data/images/FloorTile.png" type="Texture" id=4]
+[ext_resource path="res://scenes/ammo_mech1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://data/images/FlatPalette.png" type="Texture" id=7]
+[ext_resource path="res://data/images/chainPart.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 94.848, 12.9731 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 30.181, 70.4565 )
+
+[sub_resource type="GDScript" id=4]
+
+script/source = "extends KinematicBody2D
+
+onready var ground_ray = get_node(\"ground_ray\")
+onready var sprite = get_node(\"sprite\")
+onready var camera = get_node(\"camera\")
+onready var shoot_timer = get_node(\"shoot_timer\")
+onready var bullet_container = get_node(\"bullet_container\")
+onready var drop_timer = get_node(\"drop_timer\")
+
+onready var R1 = get_node(\"Rbullet_pos1\")
+onready var R2 = get_node(\"Rbullet_pos2\")
+onready var R3 = get_node(\"Rbullet_pos3\")
+onready var R4 = get_node(\"Rbullet_pos4\")
+onready var R5 = get_node(\"Rbullet_pos5\")
+onready var L1 = get_node(\"Lbullet_pos1\")
+onready var L2 = get_node(\"Lbullet_pos2\")
+onready var L3 = get_node(\"Lbullet_pos3\")
+onready var L4 = get_node(\"Lbullet_pos4\")
+onready var L5 = get_node(\"Lbullet_pos5\")
+
+export (PackedScene) var bullet
+
+
+
+
+var accel = global.player_accel
+var max_speed = global.player_maxspeed
+var friction = global.player_friction
+var gravity = global.player_gravity
+var jump_speed = global.player_jumpspeed
+var min_jump = global.player_minjump
+
+
+var acc = Vector2()
+var vel = Vector2()
+var pos = Vector2()
+var rot = 0
+var bullet_pos
+var target_dist
+var collider_name
+#var anim = \"idle\"
+
+var active = true
+var can_drop = false
+
+
+func _ready():
+	set_fixed_process(true)
+	set_process_input(true)
+
+
+
+func _input(event):
+	if active == true:
+		if event.is_action_pressed(\"ui_up\") and ground_ray.is_colliding():
+			vel.y = jump_speed
+		if event.is_action_released(\"ui_up\"):
+			vel.y = clamp(vel.y, min_jump, vel.y)
+		#if event.type==InputEvent.MOUSE_MOTION:
+#			target_dist = event.pos - pos
+#			print(get_global_mouse_pos())
+#			rot = target_dist.angle_to(Vector2(0, 1))
+		if event.is_action_pressed(\"ui_down\"):
+			if vel.y == 0:
+				if can_drop == true:
+					drop()
+					
+					
+						
+					
+				
+		if event.is_action_pressed(\"shoot\"):
+			shoot()
+		
+		
+
+		
+		
+		
+		
+func _fixed_process(delta):
+	#if vel.y == 0:
+	if ground_ray.is_colliding():
+		if ground_ray.get_collider().get_groups().has(\"drop_platforms\"):
+			can_drop = true
+			
+			
+	if drop_timer.get_time_left() == 0:
+		set_collision_mask_bit( 3, true )
+		set_layer_mask_bit( 3, true)
+	#if can_drop == false:
+	#if vel.y > 0:
+	#	set_collision_mask_bit( 3, true )
+	#	set_layer_mask_bit( 3, true)
+#	if vel.y >= 0:
+#		set_collision_mask_bit( 3, true )
+#		set_layer_mask_bit( 3, true)
+		
+	
+
+		
+
+	pos = get_global_pos()		#get_global_transform_with_canvas()[2]
+	target_dist = get_global_mouse_pos() - pos
+	rot = target_dist.angle_to(Vector2(0, 1))
+	acc.y = gravity
+	if active == true:
+		acc.x = Input.is_action_pressed(\"ui_right\") - Input.is_action_pressed(\"ui_left\")
+	else:
+		acc.x = 0
+	acc.x *= accel
+	if acc.x == 0:
+		acc.x = vel.x * friction * delta
+
+	vel += acc * delta
+	vel.x = clamp(vel.x, -max_speed, max_speed)
+	
+	var motion = move(vel * delta)
+	if is_colliding():
+		var n = get_collision_normal()
+		motion = n.slide(motion)
+		vel = n.slide(vel)
+		move(motion)
+	if abs(vel.x) < 10:
+		vel.x = 0
+
+		
+		
+	#print(rot)
+	if -3.10 < rot and rot <= -2.90:
+		rot = -3.01
+		bullet_pos = R1
+	elif -2.90 <= rot and rot < -2.22:
+		rot = -2.46
+		bullet_pos = R2
+	elif -2.22 <= rot and rot < -1.80:
+		rot = -2.00
+		bullet_pos = R3
+	elif -1.80 <= rot and rot < -0.80:
+		rot = -1.52
+		bullet_pos = R4
+	elif -0.80 <= rot and rot < -0.10:
+		rot = -0.24
+		bullet_pos = R5
+	elif 3.10 >= rot and rot > 2.90:
+		rot = 3.01
+		bullet_pos = L1
+	elif 2.90 >= rot and rot > 2.22:
+		rot = 2.46
+		bullet_pos = L2
+	elif 2.22 >= rot and rot > 1.80:
+		rot = 2.00
+		bullet_pos = L3
+	elif 1.80 >= rot and rot > 0.80:
+		rot = 1.52
+		bullet_pos = L4
+	elif 0.80 >= rot and rot > 0.10:
+		rot = 0.24
+		bullet_pos = L5
+	else:
+		rot = 0
+		bullet_pos = R1
+
+	
+	if active == false:
+		set_opacity(.2)
+	if active == true:
+		set_opacity(1)	
+		camera.make_current()
+	# set animation
+#	if vel.x == 0:
+#		anim = \"idle\"
+#	else:
+#		anim = \"running\"
+#	if vel.x > 0:
+#		sprite.set_flip_h(false)
+#	elif vel.x < 0:
+#		sprite.set_flip_h(true)
+#	sprite.play(anim)
+
+	global.mech_1_pos = pos
+
+func shoot():
+	#print(global.mech_1_pos)
+	shoot_timer.start()
+	var b = bullet.instance()
+	bullet_container.add_child(b)
+	b.start_at(rot, bullet_pos.get_global_pos())
+
+
+func drop():
+	drop_timer.start()
+	set_collision_mask_bit( 3, false )
+	set_layer_mask_bit( 3, false)
+	
+	
+func spawn_beam():
+	pass
+	
+
+
+
+"
+
+[sub_resource type="SpriteFrames" id=5]
+
+animations = [ {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 120.171, 10 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,6 +245,7 @@ transform/pos = Vector2( 1.10803, 0 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -26,16 +257,42 @@ scroll/limit_begin = Vector2( 0, 0 )
 scroll/limit_end = Vector2( 0, 0 )
 scroll/ignore_camera_zoom = false
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 
-motion/scale = Vector2( 1, 1 )
+motion/scale = Vector2( 0.1, 0.1 )
 motion/offset = Vector2( 0, 0 )
 motion/mirroring = Vector2( 0, 0 )
 
-[node name="Sprite 2" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
 
-transform/pos = Vector2( 2515.84, -500.977 )
 texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 0, 0, 5120, 5120 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+editor/display_folded = true
+motion/scale = Vector2( 0.25, 0.25 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+
+transform/scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+region = true
+region_rect = Rect2( 0, 0, 5120, 5120 )
+
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="ParallaxBackground"]
+
+motion/scale = Vector2( 0.5, 0.5 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 0, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer1"]
+
+transform/pos = Vector2( 0, -2.05054 )
+texture = ExtResource( 3 )
 region = true
 region_rect = Rect2( 0, 0, 5120, 5120 )
 
@@ -62,7 +319,7 @@ __meta__ = {
 
 transform/pos = Vector2( -0.00202751, -8.32677 )
 transform/scale = Vector2( 0.0494166, 0.519871 )
-texture = ExtResource( 2 )
+texture = ExtResource( 4 )
 region = true
 region_rect = Rect2( 0, 0, 3840, 128 )
 
@@ -73,9 +330,280 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="mech_1" parent="." instance=ExtResource( 3 )]
+[node name="mech_1" type="KinematicBody2D" parent="." groups=[
+"mechs",
+]]
 
+editor/display_folded = true
 transform/pos = Vector2( 503.591, 87.3274 )
 transform/scale = Vector2( 1, 1.19236 )
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.29413, -40.1181 )
+shapes/0/trigger = false
+collision/layers = 9
+collision/mask = 9
+collision/margin = 0.08
+script/script = SubResource( 4 )
+bullet = ExtResource( 5 )
+
+[node name="sprite" type="AnimatedSprite" parent="mech_1"]
+
+transform/pos = Vector2( -1.21677, -39.2855 )
+transform/scale = Vector2( 0.961976, 2.22767 )
+frames = SubResource( 5 )
+animation = "default"
+
+[node name="collision" type="CollisionShape2D" parent="mech_1"]
+
+transform/pos = Vector2( -1.29413, -40.1181 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="ground_ray" type="RayCast2D" parent="mech_1"]
+
+transform/pos = Vector2( 0, 32 )
+enabled = true
+cast_to = Vector2( 0, 30 )
+layer_mask = 9
+type_mask = 15
+
+[node name="camera" type="Camera2D" parent="mech_1"]
+
+transform/pos = Vector2( 0.323517, -180 )
+anchor_mode = 1
+rotating = false
+current = false
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.0
+drag_margin/top = 0.0
+drag_margin/right = 0.0
+drag_margin/bottom = 1.0
+
+[node name="Rbullet_pos1" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( 4.87677, -129.801 )
+
+[node name="Rbullet_pos2" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( 55.1073, -91.1952 )
+
+[node name="Rbullet_pos3" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( 59.0086, -39.5017 )
+
+[node name="Rbullet_pos4" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( 65.3484, 5.85211 )
+
+[node name="Rbullet_pos5" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( 20.3571, 67.6573 )
+
+[node name="Lbullet_pos1" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( -7.78357, -129.728 )
+
+[node name="Lbullet_pos2" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( -58.6762, -87.4156 )
+
+[node name="Lbullet_pos3" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( -66.4598, -37.7204 )
+
+[node name="Lbullet_pos4" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( -74.8421, 8.38232 )
+
+[node name="Lbullet_pos5" type="Position2D" parent="mech_1"]
+
+transform/pos = Vector2( -26.9431, 70.0522 )
+
+[node name="shoot_timer" type="Timer" parent="mech_1"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="bullet_container" type="Node" parent="mech_1"]
+
+[node name="drop_timer" type="Timer" parent="mech_1"]
+
+process_mode = 1
+wait_time = 0.59
+one_shot = true
+autostart = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
+"drop_platforms",
+]]
+
+editor/display_folded = true
+transform/pos = Vector2( 1060.67, 69.4176 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.10803, 94.1828 )
+shapes/0/trigger = false
+collision/layers = 8
+collision/mask = 8
+one_way_collision/direction = Vector2( 0, 1 )
+one_way_collision/max_depth = 786432.0
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+
+transform/pos = Vector2( 0, -0.440125 )
+texture = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D/Sprite"]
+
+transform/pos = Vector2( -1.19763, -343.343 )
+texture = ExtResource( 8 )
+region = true
+region_rect = Rect2( 0, 0, 13, 520 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+
+transform/pos = Vector2( -1.10803, 94.1828 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="StaticBody2D1" type="StaticBody2D" parent="." groups=[
+"drop_platforms",
+]]
+
+editor/display_folded = true
+transform/pos = Vector2( 1430.55, -77.8484 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.10803, 94.1828 )
+shapes/0/trigger = false
+collision/layers = 8
+collision/mask = 8
+one_way_collision/direction = Vector2( 0, 1 )
+one_way_collision/max_depth = 786432.0
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D1"]
+
+transform/pos = Vector2( 0, -0.440125 )
+texture = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D1/Sprite"]
+
+transform/pos = Vector2( -1.19763, -343.343 )
+texture = ExtResource( 8 )
+region = true
+region_rect = Rect2( 0, 0, 13, 520 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D1"]
+
+transform/pos = Vector2( -1.10803, 94.1828 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." groups=[
+"drop_platforms",
+]]
+
+editor/display_folded = true
+transform/pos = Vector2( 1780.86, -76.9145 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.10803, 94.1828 )
+shapes/0/trigger = false
+collision/layers = 8
+collision/mask = 8
+one_way_collision/direction = Vector2( 0, 1 )
+one_way_collision/max_depth = 786432.0
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D2"]
+
+transform/pos = Vector2( 0, -0.440125 )
+texture = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D2/Sprite"]
+
+transform/pos = Vector2( -1.19763, -343.343 )
+texture = ExtResource( 8 )
+region = true
+region_rect = Rect2( 0, 0, 13, 520 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+
+transform/pos = Vector2( -1.10803, 94.1828 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." groups=[
+"drop_platforms",
+]]
+
+editor/display_folded = true
+transform/pos = Vector2( 2050.24, 57.3453 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.10803, 94.1828 )
+shapes/0/trigger = false
+collision/layers = 8
+collision/mask = 8
+one_way_collision/direction = Vector2( 0, 1 )
+one_way_collision/max_depth = 786432.0
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D3"]
+
+transform/pos = Vector2( 0, -0.440125 )
+texture = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D3/Sprite"]
+
+transform/pos = Vector2( -1.19763, -343.343 )
+texture = ExtResource( 8 )
+region = true
+region_rect = Rect2( 0, 0, 13, 520 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+
+transform/pos = Vector2( -1.10803, 94.1828 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
 
 
