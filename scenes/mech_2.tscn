@@ -1,0 +1,128 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://scripts/mech_2.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ammo_mech1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 30.181, 70.4565 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="mech_2" type="KinematicBody2D" groups=[
+"mechs",
+]]
+
+transform/pos = Vector2( 448, 277 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.29413, -40.1181 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+bullet = ExtResource( 2 )
+
+[node name="sprite" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( -1.21677, -39.2855 )
+transform/scale = Vector2( 0.961976, 2.22767 )
+frames = SubResource( 2 )
+animation = "default"
+modulate = Color( 0.319965, 0.570313, 0.0178223, 1 )
+
+[node name="collision" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( -1.29413, -40.1181 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="ground_ray" type="RayCast2D" parent="."]
+
+transform/pos = Vector2( 0, 50 )
+enabled = true
+cast_to = Vector2( 0, 30 )
+layer_mask = 1
+type_mask = 15
+
+[node name="camera" type="Camera2D" parent="."]
+
+transform/pos = Vector2( 0.323517, -180 )
+anchor_mode = 1
+rotating = false
+current = false
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.0
+drag_margin/top = 0.0
+drag_margin/right = 0.0
+drag_margin/bottom = 0.0
+
+[node name="Rbullet_pos1" type="Position2D" parent="."]
+
+transform/pos = Vector2( 4.87677, -129.801 )
+
+[node name="Rbullet_pos2" type="Position2D" parent="."]
+
+transform/pos = Vector2( 55.1073, -91.1952 )
+
+[node name="Rbullet_pos3" type="Position2D" parent="."]
+
+transform/pos = Vector2( 59.0086, -39.5017 )
+
+[node name="Rbullet_pos4" type="Position2D" parent="."]
+
+transform/pos = Vector2( 65.3484, 5.85211 )
+
+[node name="Rbullet_pos5" type="Position2D" parent="."]
+
+transform/pos = Vector2( 20.3571, 67.6573 )
+
+[node name="Lbullet_pos1" type="Position2D" parent="."]
+
+transform/pos = Vector2( -7.78357, -129.728 )
+
+[node name="Lbullet_pos2" type="Position2D" parent="."]
+
+transform/pos = Vector2( -58.6762, -87.4156 )
+
+[node name="Lbullet_pos3" type="Position2D" parent="."]
+
+transform/pos = Vector2( -66.4598, -37.7204 )
+
+[node name="Lbullet_pos4" type="Position2D" parent="."]
+
+transform/pos = Vector2( -74.8421, 8.38232 )
+
+[node name="Lbullet_pos5" type="Position2D" parent="."]
+
+transform/pos = Vector2( -26.9431, 70.0522 )
+
+[node name="shoot_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="bullet_container" type="Node" parent="."]
+
+
