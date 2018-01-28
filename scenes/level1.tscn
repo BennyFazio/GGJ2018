@@ -28,10 +28,6 @@ transform/pos = Vector2( 2945.24, 347.089 )
 
 transform/pos = Vector2( 1525.59, 19.2018 )
 
-[node name="platform15" parent="." instance=ExtResource( 2 )]
-
-transform/pos = Vector2( 1832.02, -185.499 )
-
 [node name="platform16" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 1218.59, 212.867 )
