@@ -114,6 +114,8 @@ func _fixed_process(delta):
 		elif .30 >= rot and rot >= -.30:
 			if ground_ray.is_colliding():
 				anim = "forward"
+	elif active == false:
+		anim = "idle"
 	if ground_ray.is_colliding() == false:
 		anim = "jumping"
 	if anim == "jumping":

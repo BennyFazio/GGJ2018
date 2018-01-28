@@ -13,6 +13,9 @@ const SCREEN_MAX_Y = 700
 
 #PLAYER SETTINGS
 
+var transmittable = false
+var dropping_off = true
+
 #Physics
 var player_accel = 1200
 var player_maxspeed = 200

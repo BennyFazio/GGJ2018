@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scripts/level1.gd" type="Script" id=1]
 [ext_resource path="res://scenes/platform1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/platform_drop.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/platform_scrolling.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/zeus_five.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/mech_2.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/mech_1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/player_deployment.tscn" type="PackedScene" id=6]
 
 [node name="level1" type="Node"]
 
@@ -73,10 +72,8 @@ transform/pos = Vector2( 2172.37, 20.8899 )
 
 transform/pos = Vector2( 1494.71, 525.849 )
 
-[node name="mech_2" parent="." instance=ExtResource( 6 )]
+[node name="player_deployment" parent="." instance=ExtResource( 6 )]
 
-[node name="mech_1" parent="." instance=ExtResource( 7 )]
-
-transform/pos = Vector2( 1282.4, 486.773 )
+transform/pos = Vector2( 1744.03, 249.941 )
 
 
